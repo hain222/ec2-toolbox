@@ -1,0 +1,18 @@
+# ignore py caches
+__pycache__/
+
+# ignore .swp files
+*.swp
+
+# ignore configs
+config.ini
+aws_config.sample
+
+# ignore pem
+ngs_master_kp.pem
+
+# ignore misc
+misc/
+
+# ignore notes
+notes.txt
