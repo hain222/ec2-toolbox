@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Calls the basic script with operation 'reboot'
+
+cd "$( dirname "${BASH_SOURCE[0]}" )"/..
+python3 -m basic.basic  "reboot" "$@"
