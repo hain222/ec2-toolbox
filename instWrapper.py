@@ -81,3 +81,10 @@ class instWrapper:
 		print(self.pub_ip)
 		print(self.state)
 
+	# ws_user_setup func
+	# initiates the workshop user setup process,
+	# 1. Creates user on the instance
+	# 2. Unpacks workshop materials to their home directory
+	def ws_user_setup(user):
+		
+		return 0
