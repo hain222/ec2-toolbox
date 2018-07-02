@@ -28,3 +28,4 @@ name_key = 'Name'
 # Boto3 consts
 state_choices = ['pending', 'running', 'shutting-down', 'terminated', 'stopping', 'stopped'] # All valid states
 general_states = ['pending', 'running', 'shutting-down', 'stopping', 'stopped'] # All states minus terminated.
+rsc_type = 'instance'

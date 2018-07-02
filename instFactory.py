@@ -28,7 +28,8 @@ from instWrapper import instWrapper
 # Generates lists of instWrapper objects based on certain attributes
 class instFactory:
 	# Initialize ec2 client
-	client = boto3.client('ec2')	
+	client = boto3.client('ec2')
+	ec2 = boto3.resource('ec2')
 
 	# __wsinsts_from_response func
 	# Builds instWrapper objects from the describe response struct
@@ -38,6 +39,16 @@ class instFactory:
 			for inst in reservation['Instances']:
 				ws_inst = instWrapper(inst['InstanceId'])
 				inst_list.append(ws_inst)
+
+		return inst_list
+
+	# __wsinst_from_inst func
+	# Builds instWrapper objects from a list of instance objects
+	def __wsinsts_from_inst(self, insts):
+		inst_list = []
+		for inst in insts:
+			ws_inst = instWrapper(inst.instance_id)
+			inst_list.append(ws_inst)
 
 		return inst_list
 
@@ -94,8 +105,32 @@ class instFactory:
 		return insts
 
 	# create_instance func
-	# Create an instance assigned the specified name, and the specified
-	# config object
+	# Create a single instance assigned the specified name, using the 
+	# specified config object
 	def create_instance(self, nametag, config):
-		
-		return 0
+		raw_insts = self.ec2.create_instances(
+			ImageId = config.image_id,
+			InstanceType = config.inst_type,
+			MinCount = 1,
+			MaxCount = 1,
+			KeyName = config.key_name,
+			SecurityGroupIds=[
+				config.sg_id
+			],
+			TagSpecifications=[
+				{
+					'ResourceType': gconsts.rsc_type,
+					'Tags': [
+						{
+							'Key': gconsts.name_key,
+							'Value': nametag
+						}
+					]
+				}
+			]
+		)
+		raw_insts[0].wait_until_running()
+
+		insts = self.__wsinsts_from_inst(raw_insts)
+
+		return insts[0]
