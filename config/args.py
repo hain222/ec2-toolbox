@@ -39,7 +39,7 @@ sg_id_call = 'Security Group Identifier'
 
 # Error messages
 key_interrupt = "\nExiting: Config File Unchanged..."
-key_error = 'Exiting: INI Key Error Encountered...'
+key_error = 'ERROR: INI Key Error Encountered...'
 
 # Messages
 new_query_msg = '[NEW CONFIG]'
