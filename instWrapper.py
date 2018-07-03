@@ -20,8 +20,10 @@
 
 # -------------------------------------------------------------------
 
+import io
 import gconsts
 import boto3
+import subprocess
 
 # instWrapper class
 # See 'Purpose'
@@ -85,6 +87,15 @@ class instWrapper:
 	# initiates the workshop user setup process,
 	# 1. Creates user on the instance
 	# 2. Unpacks workshop materials to their home directory
-	def ws_user_setup(user):
-		
-		return 0
+	# Will return a list containing the username, host, and password
+	# respectively
+	def ws_user_setup(self, user):
+		ret = subprocess.run(['./'+gconsts.setup_path, user, self.pub_ip, gconsts.pem_path], stdout=subprocess.PIPE, universal_newlines=True)
+		if ret.returncode != 0:
+			raise(RuntimeError(gconsts.subprocess_error))
+
+		sret = ret.stdout.split('\n')
+		while '' in sret:
+			sret.remove('')
+
+		return sret
