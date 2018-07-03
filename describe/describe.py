@@ -9,7 +9,7 @@
 #		 script
 
 # Notes:
-# 1. Requires texttable module for the non-csv output
+# 1.
 # 2.
 # 3.
 # 4.
@@ -23,6 +23,7 @@
 #	 'describe_instances'
 # 5. Eventually want to fix hard coding in the tab_print section
 # 6. Add try except loop (KeyboardInterrupts etc...)
+# 7. Shift hard coded messages to args
 
 # -------------------------------------------------------------------
 
