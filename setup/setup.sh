@@ -10,7 +10,7 @@
 #		   2. Unpacks materials to the student directory
 
 # Usage: Called by the ws_user_setup func in the instWrapper class
-#		 CALL SYNOPSIS: ./setup/setup.sh <user> <ip>
+#		 CALL SYNOPSIS: ./setup/setup.sh <user> <ip> <pem_path>
 
 # Notes:
 # 1.
@@ -34,7 +34,6 @@ host="$2"
 pem_path="$3"
 pass=$(pwgen -n 12 1)
 addstudent="addstudent.sh"
-sub_path="$(pwd)/setup"
 max_count=6
 
 # Echo parameters to stdout for recording
@@ -49,18 +48,18 @@ echo $pass
 	count=0
 
 	until ssh -q -i "$pem_path" -o StrictHostKeyChecking=no -l ubuntu "$host" > "/dev/null"; do
-	sleep 5
+		sleep 5
 
-	if [ "$count" >= "$max_count" ]; then
-		exit 1
-	fi
+		if [ "$count" >= "$max_count" ]; then
+			exit 1
+		fi
 	
-	((count+=1))
+		((count+=1))
 
-done
+	done
 
 	# Copy over addstudent script
-	scp -q -i "$pem_path" -o StrictHostKeyChecking=no "$sub_path/$addstudent" ubuntu@"$host:~" &&\
+	scp -q -i "$pem_path" -o StrictHostKeyChecking=no "$(dirname $0)/$addstudent" ubuntu@"$host:~" &&\
 	ssh -q -i "$pem_path" -o StrictHostKeyChecking=no -l ubuntu "$host" "sudo ./$addstudent '$user' '$pass' '$host'"
 
 ) >/dev/null 2>&1 &
