@@ -11,7 +11,7 @@
 # 5.
 
 # TODO:
-# 1.
+# 1. Make pem path into an optional variable
 # 2.
 # 3.
 # 4.
