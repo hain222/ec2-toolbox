@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Runs the create script from the correct location
+
+cd "$( dirname "${BASH_SOURCE[0]}" )"/..
+python3 -m create.create "$@"
