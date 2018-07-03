@@ -46,10 +46,12 @@ def main():
 	
 	try:
 		inst = factory.create_instance(nametag, cbox)
-		print("%s Spun @ %s" % (inst.inst_id, insts.pub_ip))
-		#inst.ws_user_setup(user)
-	except:
-		print(args.create_error)
+		print("%s Spun @ %s under %s" % (inst.inst_id, inst.pub_ip, inst.inst_name))
+		ret = inst.ws_user_setup(user)
+		print('Setup Initiated @', inst.inst_id)
+		print(ret)
+	except Exception as err:
+		print("%s: [%s]" % (args.create_error, err))
 		exit(1)
 
 
