@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Runs the create script from the correct location
+# Runs the create script from the correct location, as well as exports the
+# user's cwd for usage by the module
 
+export cwd="$(pwd)"
 cd "$( dirname "${BASH_SOURCE[0]}" )"/..
 python3 -m create.create "$@"
