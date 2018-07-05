@@ -77,12 +77,12 @@ class instFactory:
 
 		return insts
 
-	# get_by_id func
+	# get_by_id function
 	# Get instances according to a provided list of instance ids
 	# returns list of instWrappers (Provided list of ids MUST be a list!)
 	def get_by_id(self, id_list):
 		response = self.client.describe_instances(
-			InstanceIds=id_list
+			InstanceIds = id_list
 		)
 		insts = self.__wsinsts_from_response(response)
 
@@ -103,6 +103,29 @@ class instFactory:
 		insts = self.__wsinsts_from_response(response)
 
 		return insts
+
+	# check_exists funcion
+	# Given a name tag, check the existance of that VM. Return True if
+	# exists, false otherwise.
+	# (Checks all states except 'terminated')
+	def check_exists(self, name):
+		response = self.client.describe_instances(
+			Filters = [
+				{
+					'Name': 'instance-state-name',
+					'Values': gconsts.general_states,
+
+					'Name': 'tag:' + gconsts.name_key,
+					'Values': [name]
+				}
+			
+			]
+		)
+		insts = self.__wsinsts_from_response(response)
+		if len(insts) != 0:
+			return True
+		else:
+			return False
 
 	# create_instance func
 	# Create a single instance assigned the specified name, using the 
