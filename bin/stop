@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Calls the basic script with operation 'stop'
-
-cd "$( dirname "${BASH_SOURCE[0]}" )"/..
-python3 -m basic.basic  "stop" "$@"
