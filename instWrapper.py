@@ -20,7 +20,7 @@
 
 # -------------------------------------------------------------------
 
-import io
+import os
 import gconsts
 import boto3
 import subprocess
@@ -90,9 +90,12 @@ class instWrapper:
 	# Will return a list containing the username, host, and password
 	# respectively
 	def ws_user_setup(self, user):
-		ret = subprocess.run(['./'+gconsts.setup_path, user, self.pub_ip, gconsts.pem_path], stdout=subprocess.PIPE, universal_newlines=True)
-		if ret.returncode != 0:
-			raise(RuntimeError(gconsts.subprocess_error))
+		if os.path.isfile(gconsts.pem_path):
+			ret = subprocess.run(['./'+gconsts.setup_path, user, self.pub_ip, gconsts.pem_path], stdout=subprocess.PIPE, universal_newlines=True)
+			if ret.returncode != 0:
+				raise(RuntimeError(gconsts.subprocess_error))
+		else:
+			raise(RuntimeError(gconsts.pem_path_error))
 
 		sret = ret.stdout.split('\n')
 		while '' in sret:

@@ -38,3 +38,4 @@ rsc_type = 'instance'
 
 # Error messages
 subprocess_error = 'ERROR: Non-zero subprocess returncode'
+pem_path_error = 'ERROR: Pem Path Not Found'
