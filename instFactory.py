@@ -113,12 +113,13 @@ class instFactory:
 			Filters = [
 				{
 					'Name': 'instance-state-name',
-					'Values': gconsts.general_states,
+					'Values': gconsts.general_states
+				},
+				{
 
 					'Name': 'tag:' + gconsts.name_key,
 					'Values': [name]
 				}
-			
 			]
 		)
 		insts = self.__wsinsts_from_response(response)
