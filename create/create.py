@@ -103,6 +103,7 @@ def main():
 		print(args.multi_spin_head)
 	else:
 		print(args.sing_spin_head)
+	print()
 
 	# Construct lists for iteration
 	user_list, name_list = gen_lists(arg_dict.asfile, abox)
