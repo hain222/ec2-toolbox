@@ -50,7 +50,7 @@ echo $pass
 	until ssh -q -i "$pem_path" -o StrictHostKeyChecking=no -l ubuntu "$host" > "/dev/null"; do
 		sleep 5
 
-		if [ "$count" >= "$max_count" ]; then
+		if [ "$count" -ge "$max_count" ]; then
 			exit 1
 		fi
 	
