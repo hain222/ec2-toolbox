@@ -158,11 +158,11 @@ If running this program for the first time it will require you to fill in all fi
 References containing supplementary links and important information.
 
 #### Workshop VM Availability
-Region "us-east-1" has public AMI "AMI-5a113025"
+Region "us-east-1" has public AMI "ami-5a113025"
 
 Region "us-east-2" has public AMI "TBA"
 
-Region "sa-east-1" has public AMI "AMI-015ee737b0f04fcc4"
+Region "sa-east-1" has public AMI "ami-015ee737b0f04fcc4"
 
 #### Workshop Links
 
